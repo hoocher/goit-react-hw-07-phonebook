@@ -3,13 +3,13 @@ import Filter from './Filter/Filter';
 import ContactForm from './ContactForm/ContactForm';
 import { ContainerDiv } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { useEffect } from 'react';
 import { fetchCotacts } from 'redux/operations';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector(getContacts);
+  const { items, isLoading, error } = useSelector(selectContacts);
 
   useEffect(() => {
     dispatch(fetchCotacts());

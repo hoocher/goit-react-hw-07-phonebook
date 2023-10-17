@@ -2,12 +2,12 @@ import ContactListItem from './ContactListItem';
 import { useDispatch, useSelector } from 'react-redux';
 
 import React from 'react';
-import { getContacts, getFilter } from 'redux/selectors';
+import { selectContacts, selectFilter } from 'redux/selectors';
 import { deleteContact } from 'redux/operations';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filterName = useSelector(getFilter);
+  const contacts = useSelector(selectContacts);
+  const filterName = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const delContact = id => {
