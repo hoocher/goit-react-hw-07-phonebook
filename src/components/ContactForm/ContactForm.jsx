@@ -1,15 +1,17 @@
+import { addContact } from 'redux/operations';
 import { InputDiv } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { nanoid } from '@reduxjs/toolkit';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
 
   const handleSubmit = e => {
     e.preventDefault();
     const name = e.target[0].value;
     const number = e.target[1].value;
+
     const alredyHas = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -17,7 +19,14 @@ const ContactForm = () => {
       return alert(`${name} is alredy in contacts`);
     }
 
-    dispatch(addContact(name, number));
+    const contact = {
+      id: nanoid(),
+      name: name,
+      phone: number,
+    };
+
+    dispatch(addContact(contact));
+
     const form = e.target;
     form.reset();
   };
